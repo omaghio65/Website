@@ -9,3 +9,8 @@ Icon?
 
 # Logs
 *.log
+
+# Backups
+*.bak
+*.bak.*
+PROGRESS.md
