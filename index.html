@@ -5,12 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The IceCube — Premium Ice Bath Systems</title>
-  <!-- Privacy-friendly analytics by Plausible — no cookies, DSGVO-compliant -->
-  <script async src="https://plausible.io/js/pa-xcqAyCLORlSzrizPgrWBz.js"></script>
+  <!-- Google Analytics GA4 — loaded only after cookie consent -->
   <script>
-    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-    plausible.init()
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      wait_for_update: 500
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-7TXSEW51K7', { anonymize_ip: true });
   </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TXSEW51K7"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -3442,6 +3449,56 @@
     const saved = localStorage.getItem('icecube_lang');
     if (saved && i18n[saved]) applyLang(saved);
   } catch(e) {}
+  </script>
+
+  <!-- ====== DSGVO COOKIE CONSENT BANNER ====== -->
+  <div id="cookie-banner" style="
+    display:none;
+    position:fixed;bottom:0;left:0;right:0;z-index:99999;
+    background:#0D2B3E;color:#fff;
+    padding:1.2rem 2rem;
+    display:flex;align-items:center;justify-content:space-between;
+    flex-wrap:wrap;gap:1rem;
+    font-family:'Inter',sans-serif;font-size:0.85rem;
+    border-top:2px solid #0077B6;
+    box-shadow:0 -4px 24px rgba(0,0,0,0.3);
+  ">
+    <p style="margin:0;max-width:700px;line-height:1.5;">
+      🍪 Wir verwenden Google Analytics, um zu verstehen, wie Besucher unsere Website nutzen.
+      Ihre Daten werden anonymisiert und nicht an Dritte weitergegeben.
+      <a href="#" onclick="showPage('home','contact')" style="color:#0096C7;">Mehr erfahren</a>
+    </p>
+    <div style="display:flex;gap:0.75rem;flex-shrink:0;">
+      <button onclick="setCookieConsent(false)" style="
+        padding:0.6rem 1.4rem;border-radius:50px;border:1px solid #0077B6;
+        background:transparent;color:#fff;cursor:pointer;font-weight:600;font-size:0.8rem;
+      ">Ablehnen</button>
+      <button onclick="setCookieConsent(true)" style="
+        padding:0.6rem 1.4rem;border-radius:50px;border:none;
+        background:#0077B6;color:#fff;cursor:pointer;font-weight:700;font-size:0.8rem;
+      ">Akzeptieren</button>
+    </div>
+  </div>
+
+  <script>
+    // Cookie consent logic — DSGVO compliant
+    function setCookieConsent(accepted) {
+      localStorage.setItem('cookie_consent', accepted ? 'granted' : 'denied');
+      document.getElementById('cookie-banner').style.display = 'none';
+      if (accepted) {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+      }
+    }
+
+    // Show banner only if no decision yet
+    (function() {
+      const consent = localStorage.getItem('cookie_consent');
+      if (!consent) {
+        document.getElementById('cookie-banner').style.display = 'flex';
+      } else if (consent === 'granted') {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+      }
+    })();
   </script>
 
 </body>
