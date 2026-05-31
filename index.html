@@ -1771,7 +1771,7 @@
         <p data-i18n="hero_p">The professional-grade cold plunge built for gyms, hotels, clinics, and corporate wellness. Business-grade hygiene, stable ~8&deg;C, and a revenue model that pays for itself.</p>
         <div class="hero-buttons">
           <a onclick="showPage('b2b')" class="btn btn-primary" data-i18n="hero_cta1">Partner With Us</a>
-          <a onclick="showPage('b2b', 'apply')" class="btn btn-outline" data-i18n="hero_cta3">Get the ROI Breakdown</a>
+          <a onclick="gtag('event','b2b_applied',{event_category:'conversion',event_label:'hero'}); showPage('b2b', 'apply')" class="btn btn-outline" data-i18n="hero_cta3">Get the ROI Breakdown</a>
           <a onclick="showPage('reserve')" class="btn btn-outline" data-i18n="hero_cta2">Claim a Spot at the Experience</a>
         </div>
       </div>
@@ -1833,7 +1833,7 @@
             </div>
           </div>
           <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-            <a onclick="showPage('home', 'contact')" class="btn btn-primary" data-i18n="hero_cta1">Request a Quote</a>
+            <a onclick="gtag('event','quote_requested',{event_category:'conversion'}); showPage('home', 'contact')" class="btn btn-primary" data-i18n="hero_cta1">Request a Quote</a>
             <a onclick="showPage('reserve')" class="btn btn-outline" data-i18n="showcase_try">Try It First</a>
           </div>
         </div>
@@ -2054,7 +2054,7 @@
             <li>Co-branded wrap included</li>
             <li>Launch event support</li>
           </ul>
-          <a onclick="showPage('home', 'contact')" class="btn btn-outline" style="width: 100%; justify-content: center; margin-top: 2rem;" data-i18n="pricing3_cta">Get a Quote</a>
+          <a onclick="gtag('event','quote_requested',{event_category:'conversion',event_label:'pricing'}); showPage('home', 'contact')" class="btn btn-outline" style="width: 100%; justify-content: center; margin-top: 2rem;" data-i18n="pricing3_cta">Get a Quote</a>
         </div>
       </div>
       <div style="max-width: 780px; margin: 2rem auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
@@ -2207,7 +2207,7 @@
         <div class="problem-box">
           <p>Your premium members are currently <em>leaving your facility</em> to spend <strong>€20&ndash;€30 at external recovery spas</strong>. Keep that revenue in-house. We provide the hardware, the science-backed positioning, and the marketing event to launch it. <strong>You provide the floor space.</strong></p>
         </div>
-        <a onclick="showPage('b2b', 'apply')" class="btn btn-primary" style="margin-top: 1rem; cursor: pointer;">Claim 1 of 5 June Pilot Slots</a>
+        <a onclick="gtag('event','b2b_applied',{event_category:'conversion',event_label:'pilot'}); showPage('b2b', 'apply')" class="btn btn-primary" style="margin-top: 1rem; cursor: pointer;">Claim 1 of 5 June Pilot Slots</a>
       </div>
     </section>
 
@@ -2697,7 +2697,8 @@
   <!-- ====== WHATSAPP FLOATING BUTTON (visible on ALL pages) ====== -->
   <a class="whatsapp-float" id="whatsappBtn"
      href="https://wa.me/4917012345678?text=Hi%20IceCube%20team!%20I%E2%80%99d%20like%20to%20claim%20a%20spot%20at%20the%20next%20experience%20event."
-     target="_blank" rel="noopener">
+     target="_blank" rel="noopener"
+     onclick="gtag('event','whatsapp_click',{event_category:'conversion'})">
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
       <path d="M16.004 0C7.165 0 .002 7.161.002 15.997c0 2.82.737 5.576 2.14 8.003L0 32l8.236-2.102a15.94 15.94 0 007.768 1.986C24.84 31.884 32 24.723 32 15.997 32 7.161 24.84 0 16.004 0zm0 29.29a13.36 13.36 0 01-7.205-2.1l-.516-.308-5.353 1.366 1.39-5.226-.337-.536A13.32 13.32 0 012.6 15.997c0-7.39 6.014-13.4 13.404-13.4 7.39 0 13.4 6.01 13.4 13.4 0 7.39-6.01 13.293-13.4 13.293zm7.346-10.034c-.403-.2-2.384-1.176-2.753-1.31-.37-.135-.639-.2-.908.2-.269.403-1.042 1.31-1.277 1.58-.235.268-.47.301-.873.1-.403-.2-1.7-.626-3.24-1.997-1.197-1.068-2.005-2.387-2.24-2.79-.234-.402-.024-.62.177-.82.18-.18.403-.47.604-.703.202-.235.269-.403.403-.672.134-.268.067-.503-.034-.703-.1-.2-.908-2.187-1.243-2.993-.328-.786-.66-.68-.908-.692-.235-.012-.503-.015-.772-.015-.268 0-.704.1-1.073.503-.37.403-1.41 1.377-1.41 3.36 0 1.983 1.443 3.898 1.645 4.166.2.269 2.84 4.335 6.882 6.078.961.415 1.712.663 2.297.849.966.307 1.844.263 2.538.16.775-.116 2.384-.975 2.72-1.916.335-.942.335-1.75.235-1.916-.1-.168-.37-.269-.773-.47z"/>
     </svg>
@@ -3033,6 +3034,7 @@
       const data = await res.json();
 
       if (data.success) {
+        gtag('event', 'booking_submitted', { event_category: 'conversion', event_label: selectedStudio });
         showMessage("Booking request sent! We'll confirm your spot shortly via email.", 'success');
         document.getElementById('bookingForm').reset();
         selectedDate = null;
